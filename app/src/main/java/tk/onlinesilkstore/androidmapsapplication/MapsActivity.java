@@ -2,6 +2,8 @@ package tk.onlinesilkstore.androidmapsapplication;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 //import android.location.LocationListener;
 import android.os.Build;
@@ -11,6 +13,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -27,6 +32,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
@@ -53,6 +61,53 @@ public class MapsActivity extends FragmentActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.search_btn:
+                mMap.clear();
+                EditText search=(EditText)findViewById(R.id.location_search);
+                String  search_item=search.getText().toString();
+                List<Address> address_list = null;
+                MarkerOptions search_markeroptions=new MarkerOptions();
+                if(!TextUtils.isEmpty(search_item))
+                {
+                    Geocoder geocoder= new Geocoder(this);
+                    try {
+                        address_list=geocoder.getFromLocationName(search_item,6);
+                        if(address_list!=null) {
+
+                            for (int i = 0; i < address_list.size(); i++) {
+                                Address listing = address_list.get(i);
+                                LatLng latLng = new LatLng(listing.getLatitude(), listing.getLongitude());
+                                search_markeroptions.position(latLng);
+                                search_markeroptions.title(search_item);
+                                search_markeroptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                mMap.addMarker(search_markeroptions);
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                mMap.animateCamera(CameraUpdateFactory.zoomTo(1));
+                            }
+
+                        }
+                        else
+                        {
+                            Toast.makeText(this,"No such Location exists",Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(this,"Please enter a search item before clicking search item",Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
     }
 
 
@@ -136,7 +191,7 @@ public class MapsActivity extends FragmentActivity implements
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         currentuserLOcationMArker=mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(1));
         if(googleApiClient!=null)
         {
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);

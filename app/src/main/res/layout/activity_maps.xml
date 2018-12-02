@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="314dp"
+            android:layout_height="50dp"
+            android:id="@+id/location_search"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:hint="Enter Places for Search"
+            android:textColorHint="@android:color/holo_orange_light"
+            />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/search_btn"
+            android:background="@android:color/holo_purple"
+            android:onClick="onClick"
+            android:text="search"
+            />
+
+    </RelativeLayout>
+
+
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,4 +37,42 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="45dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
     tools:context=".MapsActivity" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/hosptal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="67dp"
+            android:layout_marginRight="6dp"
+            android:onClick="onClick"
+            android:src="@mipmap/hospital"
+            />
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/school"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/hosptal"
+            android:layout_marginRight="6dp"
+            android:onClick="onClick"
+            android:src="@mipmap/school"
+            />
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/resturant"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/school"
+            android:onClick="onClick"
+            android:src="@mipmap/resturant"
+            />
+    </RelativeLayout>
+    </RelativeLayout>
