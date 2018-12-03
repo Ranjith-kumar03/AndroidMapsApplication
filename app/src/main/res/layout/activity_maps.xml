@@ -47,7 +47,7 @@
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/hosptal"
+            android:id="@+id/hospital"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="67dp"
@@ -60,7 +60,7 @@
             android:layout_height="80dp"
             android:id="@+id/school"
             android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/hosptal"
+            android:layout_toEndOf="@+id/hospital"
             android:layout_marginRight="6dp"
             android:onClick="onClick"
             android:src="@mipmap/school"
