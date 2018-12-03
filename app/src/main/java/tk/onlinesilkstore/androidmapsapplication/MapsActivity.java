@@ -156,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements
         google_url.append("&radius="+ProximityRadius);
         google_url.append("&type="+nearByPlace);
         google_url.append("&sensor=true");
-        google_url.append("&key="+"AIzaSyBQ-ao89cBIo-Pihtl0aYgFZ6LWpdvQTL0-xxxxxxxx");
+        google_url.append("&key="+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         Log.d(TAG , "getURL: "+google_url.toString());
         return  google_url.toString();
     }
